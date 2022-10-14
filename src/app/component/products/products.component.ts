@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+// import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 
 @Component({
   selector: 'app-products',
@@ -7,8 +7,8 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  public configuration: Config;
-  public columns: Columns[];
+  // public configuration: Config;
+  // public columns: Columns[];
   public data = [{
     phone: '+1 (934) 551-2224',
     age: 20,
@@ -27,16 +27,16 @@ export class ProductsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.configuration = { ...DefaultConfig };
-    this.configuration.searchEnabled = true;
-    // ... etc.
-    this.columns = [
-      { key: 'phone', title: 'Phone' },
-      { key: 'age', title: 'Age' },
-      { key: 'company', title: 'Company' },
-      { key: 'name', title: 'Name' },
-      { key: 'isActive', title: 'STATUS' },
-    ];
+    // this.configuration = { ...DefaultConfig };
+    // this.configuration.searchEnabled = true;
+    // // ... etc.
+    // this.columns = [
+    //   { key: 'phone', title: 'Phone' },
+    //   { key: 'age', title: 'Age' },
+    //   { key: 'company', title: 'Company' },
+    //   { key: 'name', title: 'Name' },
+    //   { key: 'isActive', title: 'STATUS' },
+    // ];
   }
 
 }

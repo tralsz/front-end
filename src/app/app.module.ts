@@ -13,6 +13,7 @@ import { ProductsDetailsComponent } from './component/products-details/products-
 import { TableModule } from 'ngx-easy-table';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
