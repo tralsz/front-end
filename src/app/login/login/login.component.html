@@ -1,0 +1,16 @@
+<div class="row center">
+    <div class="col-md-12" >Welcome</div>
+</div>
+
+<div class="settings">
+    <label>Username:</label>
+    <input type="text" class="form-control form-control-rounded" [(ngModel)]="loginForm.username"/>
+
+    <label>Password</label>
+    <input type="password" class="form-control form-control-rounded" [(ngModel)]="loginForm.password" />
+
+</div>
+
+
+    <button type="button" class="loginButton btn btn-primary" (click)="login()">Primary</button>
+    <span class="error-notify" *ngIf="showError" >Enter OTP is empty.</span> 
