@@ -1,1 +1,31 @@
-<p>products-details works!</p>
+<div class="row m-1">
+
+    <div class="col-md-6 " style="float:none;margin:auto;">
+        <c-card class="p-1">
+            <div class="row ">
+                <div class="col-md-5">
+                    <label>ID:</label>
+                    <input type="text" class="form-control form-control-rounded" readonly />
+                    <label>Product Name:</label>
+                    <input type="text" class="form-control form-control-rounded" [readonly]="productUse" />
+                    <label>Product Description:</label>
+                    <input type="text" class="form-control form-control-rounded" [readonly]="productUse" />
+                    
+                </div>
+                <div class="col-md-7">
+                    <img height="200" width="200"  src="assets/256px-Sunflower_from_Silesia2.jpg" style="float:right" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7  ">
+                    <button type="button" class=" m-2 loginButton btn btn-primary" >Edit</button>
+                    <button type="button" class="loginButton btn btn-danger" >Delete</button>
+                    
+                </div>
+   
+                
+            </div>
+            <!-- <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)"></ng2-smart-table> -->
+        </c-card>
+    </div>
+</div>

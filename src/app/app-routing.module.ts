@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login/login.component';
 import { TestComponent } from './test/test.component';
 import {AuthGuardService} from './common/auth-guard.service'
 import { ProductsComponent } from './component/products/products.component';
+import { ProductsDetailsComponent } from './component/products-details/products-details.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
     path:'products',
     canActivate: [AuthGuardService],
     component:ProductsComponent
+  },
+  {
+    path:'products/:productId',
+    canActivate: [AuthGuardService],
+    component:ProductsDetailsComponent
   }
 ];
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,4 +24,10 @@ export class HttpHelperService {
     const req = new HttpRequest("post", url, data, {headers: this.httpHeader, params:httpParams});
     return this._http.request(req)
   }
+
+  get(url: string, params?: HttpParams, requiredHeader?: true): Observable<any> {
+    this.setHeaders()
+    const req = new HttpRequest("get", url, {headers: this.httpHeader, params: params});
+    return this._http.request(req);
+}
 }

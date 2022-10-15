@@ -1,4 +1,8 @@
-<!-- <ngx-table [configuration]="configuration"
-           [data]="data"
-           [columns]="columns">
-</ngx-table> -->
+
+<div class="row m-1">
+    <div class="col-md-6 " style="float:none;margin:auto;">
+        <c-card>
+            <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)"></ng2-smart-table>
+          </c-card>
+    </div>
+</div>
