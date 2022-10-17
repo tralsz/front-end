@@ -10,7 +10,6 @@ export class LoginService {
   constructor(private httpHelper: HttpHelperService) { }
 
   login(userDetails:any): Observable<any>{
-    console.log(1)
     return this.httpHelper.post(this.baseUrl + "/User/Authenticate", userDetails)
   }
 }

@@ -79,7 +79,6 @@ export class ComponentHelperService {
   }
 
   delete(url,param?:any):Observable<any>{
-    console.log(this.baseUrl + url)
     return this.httpHelper.delete(this.baseUrl + url,param);
   }
 }

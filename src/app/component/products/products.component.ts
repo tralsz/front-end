@@ -77,8 +77,7 @@ export class ProductsComponent implements OnInit {
       }
     }, error => {
       if(error.error.status = 401){
-        // console.log(error.error)
-        // console.log(error.error.status)
+
         this.compenentHealperService.errorHandler(error)
       }
 
@@ -117,7 +116,6 @@ export class ProductsComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("yes")
         // Swal.fire('Saved!', '', 'success')
         this.deleteProductById($event['data'].id);
       } else if (result.isDenied) {
@@ -127,10 +125,8 @@ export class ProductsComponent implements OnInit {
 
   }
   deleteProductById(productIdForDeletion) {
-    console.log("deleteting product with id " , productIdForDeletion)
     this.compenentHealperService.delete(`/products/delete/${productIdForDeletion}` ).subscribe(resp=>{
       if(resp.body){
-        console.log(resp.body)
         this.compenentHealperService.alert('success',"Product Successfully Deleted","")
       }
     },error=>{

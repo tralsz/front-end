@@ -13,7 +13,6 @@ export class AppComponent {
   title = 'front-end';
   constructor(private loadService: LoaderService){}
   setLoading(value: boolean = false) {
-    console.log("valueeee",value)
     this.loadingFlag = value
   }
   ngAfterViewInit() {

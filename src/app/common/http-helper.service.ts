@@ -20,11 +20,9 @@ export class HttpHelperService {
     }
   }
   post(url: string, data?: any, httpParams?: HttpParams) {
-    console.log("yes y es yes")
     this.setHeaders()
     const req = new HttpRequest("post", url, data, { headers: this.httpHeader, params: httpParams });
     var x = this._http.request(req)
-    console.log("X",x)
     return x
   }
 
