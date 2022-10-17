@@ -1,28 +1,38 @@
-<div class="row center">
-    <div class="col-md-12" >Welcome</div>
+<div class="row center ">
+    <div class="col-md-12">Welcome</div>
 </div>
+
+
 
 <div class="row">
-    <div class="col-md-3" style="float:none;margin:auto;">
-    <label>Username:</label>
-    <input type="text" class="form-control form-control-rounded" [(ngModel)]="loginForm.username"/>
 
-    <label>Password</label>
-    <input type="password" class="form-control form-control-rounded" [(ngModel)]="loginForm.password" />
+    <div class="col-md-5 mt-1" style="float:none;margin:auto;">
+        <c-card>
+            <!-- <h5 cCardTitle class="float:none;margin:auto;">Card title</h5> -->
+            <div class="row">
+                <div class="col-md-7 m-2">
+                    <label>Username:</label>
+                    <input type="text" class="form-control form-control-rounded" [(ngModel)]="loginForm.username" />
+                </div>
+                <div class="col-md-7 m-2">
+                    <label>Password</label>
+                    <input type="password" class="form-control form-control-rounded" [(ngModel)]="loginForm.password" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="error-notify" *ngIf="showError">Wrong login Information.</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 m-1">
+                    <!-- <span class="error-notify" >Wrong login Information.</span> -->
+                    <button type="button" class="loginButton btn btn-primary" (click)="login()">Log in</button>
+                </div>
+
+            </div>
+        </c-card>
     </div>
+
 </div>
-<div class="row">
-    <div class="col-md-3" style="float:none;margin:auto;">
-        <button type="button" class="loginButton btn btn-primary" (click)="login()">Log in</button>
-        <span class="error-notify" *ngIf="showError" >Wrong login Information.</span> 
-    </div>
-</div>
-
-<!-- <div class="settings " style="float:none;margin:auto;">
-    <label>Username:</label>
-    <input type="text" class="form-control form-control-rounded" [(ngModel)]="loginForm.username"/>
-
-    <label>Password</label>
-    <input type="password" class="form-control form-control-rounded" [(ngModel)]="loginForm.password" />
-
-</div> -->

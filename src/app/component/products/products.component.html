@@ -1,9 +1,9 @@
 
 <div class="row m-1">
     <div class="col-md-6 " style="float:none;margin:auto;">
-        <c-card>
+        <c-card *ngIf="showData">
             <input #search class="search" type="text" placeholder="Search by product Name and press enter..." (keydown.enter)="onSearch(search.value)">
-            <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)" (create)="onCreateConfirm($event)" (delete)="onDelete($event)"></ng2-smart-table>
+            <ng2-smart-table  [settings]="settings" [source]="source" (custom)="onCustomAction($event)" (create)="onCreateConfirm($event)" (delete)="onDelete($event)"></ng2-smart-table>
           </c-card>
     </div>
 </div>

@@ -1,13 +1,8 @@
 <div class="back-div" >
     <a ><img class="back-button" matTooltip="Back To Product Page" (click)="backToProduct()"
-            src="assets/left-arrow.svg" style="font-size: 18px;">Back To Product Page</a>
-            <!-- <h1><span style="font-size: 18px;">Back To Product Page</span> -->
-    
-        
-
+            src="assets/left-arrow.svg" style="font-size: 18px;">Back To Product Page</a>  
 </div>
-<div class="row m-1">
-
+<div class="row m-1" *ngIf="showPageContent()">
     <div class="col-md-10 " style="float:none;margin:auto;">
         <c-card class="p-1">
             <div class="row ">

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         this._router.navigateByUrl('/products')
       }
     },error=>{
-      if(error.error.status = 401){
+      if(error.status = 401){
         this.showError = true
       }
     })  

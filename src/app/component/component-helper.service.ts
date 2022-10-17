@@ -30,16 +30,29 @@ export class ComponentHelperService {
   }
 
   errorHandler(error){
+
     var content;
     var subject;
+
+
     if(error.error.includes("Exist")){
       subject = "Duplicate",
       content = error.error;
     }
-    else if(error.error.status = 401){
-      subject = "Session Expired"
+    else if(error.status == 404){
+      subject = "Not Found",
+      content = error.error
+    } else if(error.error){
+      if(error.error.status = 401){
+        subject = "Session Expired"
       content = "Your session has expired. You will be redircted to login page"
-    }else{
+      }else{
+        subject = "Unknown Error",
+        content = "Sorry for the trouble. Please contact Admisntration"
+      }
+      
+    }
+    else{
       subject = "Unknown Error",
       content = "Sorry for the trouble. Please contact Admisntration"
     }
@@ -63,5 +76,10 @@ export class ComponentHelperService {
 
   post(url,body,params?:any):Observable<any>{
     return this.httpHelper.post(this.baseUrl + url,body,params)
+  }
+
+  delete(url,param?:any):Observable<any>{
+    console.log(this.baseUrl + url)
+    return this.httpHelper.delete(this.baseUrl + url,param);
   }
 }

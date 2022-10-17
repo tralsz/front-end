@@ -67,12 +67,13 @@ export class ProductsDetailsComponent implements OnInit {
       }
     },error=>{
       this.compenentHealperService.errorHandler(error)
+      this.backToProduct()
     })
   }
   deleteProduct(){
     // document.querySelector('#from1').onsubmit = function(e){
       Swal.fire({
-        title: 'You sure want to delete product with id ' + this.productId + ' ?',
+        title: 'You sure want to delete product with id ' + this.productOrigin.id + ' ?',
         showDenyButton: true,
         // showCancelButton: true,
         confirmButtonText: 'Yes',
@@ -86,14 +87,21 @@ export class ProductsDetailsComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           // Swal.fire('Saved!', '', 'success')
-          this.deleteProductById();
+          this.deleteProductById(this.productOrigin.id);
         } else if (result.isDenied) {
           // Swal.fire('Changes are not saved', '', 'info')
         }
       })
   }
-  deleteProductById() {
-    console.log("product Deleted")
+  deleteProductById(productIdForDeletion) {
+    this.compenentHealperService.delete(`/products/delete/${productIdForDeletion}` ).subscribe(resp=>{
+      if(resp.body){
+        this.compenentHealperService.alert('success',"Product Successfully Deleted","")
+        this.backToProduct();
+      }
+    },error=>{
+      this.compenentHealperService.errorHandler(error)
+    })
   }
   editProduct(){
     this.productReadonly = false
@@ -146,5 +154,9 @@ export class ProductsDetailsComponent implements OnInit {
 
   disableSaveButton(){
     return (this.productEdit.name == '')
+  }
+
+  showPageContent(){
+    return this.createNewProductFlag ? true : this.productOrigin.name!=''
   }
 }

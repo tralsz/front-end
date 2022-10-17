@@ -56,13 +56,14 @@ export class ProductsComponent implements OnInit {
     // hideSubHeader: true
   }
   source: LocalDataSource;
-
+  showData = false;
   constructor(private compenentHealperService: ComponentHelperService,private _router: Router) {
     this.source = new LocalDataSource();
   }
 
   ngOnInit(): void {
     this.getProducts()
+
   }
   
   // this.source
@@ -71,7 +72,8 @@ export class ProductsComponent implements OnInit {
 
     this.compenentHealperService.get("/Products/getall", params).subscribe(resp => {
       if (resp.body) {
-        this.source.load(resp.body)
+        this.source.load(resp.body),
+        this.showData = true;
       }
     }, error => {
       if(error.error.status = 401){
@@ -115,6 +117,7 @@ export class ProductsComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
+        console.log("yes")
         // Swal.fire('Saved!', '', 'success')
         this.deleteProductById($event['data'].id);
       } else if (result.isDenied) {
@@ -125,6 +128,14 @@ export class ProductsComponent implements OnInit {
   }
   deleteProductById(productIdForDeletion) {
     console.log("deleteting product with id " , productIdForDeletion)
+    this.compenentHealperService.delete(`/products/delete/${productIdForDeletion}` ).subscribe(resp=>{
+      if(resp.body){
+        console.log(resp.body)
+        this.compenentHealperService.alert('success',"Product Successfully Deleted","")
+      }
+    },error=>{
+      this.compenentHealperService.errorHandler(error)
+    })
     
   }
 

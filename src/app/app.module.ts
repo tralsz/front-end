@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 import { LoginService } from './login/login.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TestComponent } from './test/test.component';
 import { ProductsComponent } from './component/products/products.component';
 import { ProductsDetailsComponent } from './component/products-details/products-details.component';
@@ -20,8 +20,10 @@ import { CardModule } from '@coreui/angular';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { InterceptorComponent } from './common/interceptor/interceptor.component';
+import { LoaderComponent } from './common/loader/loader.component';
+import{ LoaderService} from './common/loader.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductsComponent,
     ProductsDetailsComponent,
     ButtonViewComponent,
-
-
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -43,10 +44,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CardModule,
     IconModule,
     BrowserAnimationsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
 
   ],
-  providers: [LoginService,ComponentHelperService,IconSetService],
+  providers: [
+    LoginService,
+    ComponentHelperService,
+    LoaderService,
+    IconSetService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorComponent, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
