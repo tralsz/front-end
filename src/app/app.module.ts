@@ -18,6 +18,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // import { TableModule } from 'ngx-easy-table';
 import { CardModule } from '@coreui/angular';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +41,10 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
     Ng2SmartTableModule,
     FontAwesomeModule,
     CardModule,
-    IconModule
+    IconModule,
+    BrowserAnimationsModule,
+    MatTooltipModule
+
   ],
   providers: [LoginService,ComponentHelperService,IconSetService],
   bootstrap: [AppComponent]

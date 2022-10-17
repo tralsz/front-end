@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.loginForm)
-    console.log("loginng")
+
     this.loginService.login(this.loginForm).subscribe(resp=>{
       if(resp.body){
         this.showError = false;

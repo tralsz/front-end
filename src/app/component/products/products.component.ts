@@ -15,43 +15,45 @@ import Swal from 'sweetalert2';
 export class ProductsComponent implements OnInit {
 
   settings = {
-
+    mode: 'external',
     columns: {
       id: {
-        title: 'ID'
+        title: 'ID',
+        filter: false,
+        editable:false,
+        addable: false,
       },
       name: {
-        title: 'Name'
+        title: 'Name',
+        filter: false,
+        // filterFunction(cell?:any, search?:string): boolean{
+        //   return false
+            
+        // }
       },
-      description: {
-        title: 'Description'
-      },
-      // button: {
-      //   title: 'Button',
-      //   type: 'custom',
-      //   renderComponent: ButtonViewComponent,
-      //   onComponentInitFunction(instance) {
-      //     instance.save.subscribe(row => {
-      //       this.test(row)
-      //       alert(`${row.name} saved!`)
-      //     });
-      //   }
-      // },
-
     },
     actions: {
       columnTitle: 'Actions',
-      add: false,
+      add: true,
       edit: false,
-      delete: false,
+      delete: true,
       custom: [
       { name: 'viewrecord', title: '<i class="fa fa-eye"></i>'},
       // { name: 'editrecord', title: '&nbsp;&nbsp;<i class="fa  fa-pencil"></i>' }
     ],
       position: 'right'
     },
+    add:{
+      addButtonContent:'<i class="fa fa-plus"></i>',
+      // createButtonContent: '<i class="fa fa-check"></i>',
+      // cancelButtonContent: '<i class="fa fa-ban"></i>',
+      // confirmCreate: true
+    },
+    delete:{
+      deleteButtonContent:'<i class="fa fa-trash"></i>'
+    }
     // actions: false,
-    hideSubHeader: true
+    // hideSubHeader: true
   }
   source: LocalDataSource;
 
@@ -60,19 +62,21 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.getProducts()
   }
-  getProducts() {
-    let params = new HttpParams()
-    this.compenentHealperService.get("https://localhost:7030/Products/getall", params).subscribe(resp => {
+  
+  // this.source
+  getProducts(params?:any) {
+
+
+    this.compenentHealperService.get("/Products/getall", params).subscribe(resp => {
       if (resp.body) {
         this.source.load(resp.body)
       }
     }, error => {
       if(error.error.status = 401){
-        console.log(error.error)
-        console.log(error.error.status)
+        // console.log(error.error)
+        // console.log(error.error.status)
         this.compenentHealperService.errorHandler(error)
       }
 
@@ -81,13 +85,47 @@ export class ProductsComponent implements OnInit {
 
 
   onCustomAction($event){
-    console.log("truee")
-    console.log($event)
-    console.log($event['data']['id'])
-
     this._router.navigate([`products/${$event['data']['id']}`]);
     //todo: 
     // make sure only exist id show content nothing else. 
+  }
+
+  onSearch(v){
+    let params = new HttpParams();
+    params = params.set("name",v)
+    this.getProducts(params)  
+  }
+
+  onCreateConfirm($event){
+    this._router.navigate([`products/new`]);
+  }
+
+  onDelete($event){
+    Swal.fire({
+      title: 'You sure want to delete product with id ' + $event['data'].id + ' ?',
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire('Saved!', '', 'success')
+        this.deleteProductById($event['data'].id);
+      } else if (result.isDenied) {
+        // Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+
+  }
+  deleteProductById(productIdForDeletion) {
+    console.log("deleteting product with id " , productIdForDeletion)
+    
   }
 
 

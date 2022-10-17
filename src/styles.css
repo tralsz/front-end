@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.back-button {
+    width: 23px;
+    margin-right: 13px;
+    cursor: pointer;
+    
+  }
+.back-div{
+    margin-left: 20px;
+}
+
+.mandatory {
+  color: #ff1919;
+
+  &.top-error {
+    font-size: .8rem;
+    margin: 0 1.5rem;
+  }
+}

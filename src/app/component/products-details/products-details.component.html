@@ -1,25 +1,39 @@
+<div class="back-div" >
+    <a ><img class="back-button" matTooltip="Back To Product Page" (click)="backToProduct()"
+            src="assets/left-arrow.svg" style="font-size: 18px;">Back To Product Page</a>
+            <!-- <h1><span style="font-size: 18px;">Back To Product Page</span> -->
+    
+        
+
+</div>
 <div class="row m-1">
 
-    <div class="col-md-6 " style="float:none;margin:auto;">
+    <div class="col-md-10 " style="float:none;margin:auto;">
         <c-card class="p-1">
             <div class="row ">
-                <div class="col-md-5">
-                    <label>ID:</label>
-                    <input type="text" class="form-control form-control-rounded" readonly />
+                <div class="col-md-5 ">
+                    <label *ngIf="!createNewProductFlag" >ID:</label>
+                    <input *ngIf="!createNewProductFlag" type="text" class="form-control form-control-rounded mb-1" [(ngModel)]= "productEdit.id" readonly />
                     <label>Product Name:</label>
-                    <input type="text" class="form-control form-control-rounded" [readonly]="productUse" />
+                    <span  class="mandatory">*</span>
+                    <input type="text" class="form-control form-control-rounded mb-1" [(ngModel)]= "productEdit.name" [readonly]="productReadonly" />
                     <label>Product Description:</label>
-                    <input type="text" class="form-control form-control-rounded" [readonly]="productUse" />
+                    <input type="text" class="form-control form-control-rounded" [(ngModel)]= "productEdit.description" [readonly]="productReadonly" />
                     
                 </div>
                 <div class="col-md-7">
-                    <img height="200" width="200"  src="assets/256px-Sunflower_from_Silesia2.jpg" style="float:right" >
+                    <label>Image Url:</label>
+                    <input type="text" class="form-control form-control-rounded mb-1" [(ngModel)]= "productEdit.imageUrl"  [readonly]="productReadonly" />
+                    <img height="200" width="200" *ngIf="productEdit.imageUrl!=''" [src]="productEdit.imageUrl" style="float:right" >
+                   
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-7  ">
-                    <button type="button" class=" m-2 loginButton btn btn-primary" (click)="editProduct()" >Edit</button>
-                    <button type="button" class="loginButton btn btn-danger" (click)="deleteProduct()" >Delete</button>
+                    <button type="button"  class=" m-2 loginButton btn btn-primary" *ngIf="productReadonly" (click)="editProduct()" >Edit</button>
+                    <button type="button" class=" m-2 loginButton btn btn-primary" *ngIf="!productReadonly" (click)="saveProduct()" [disabled] = "disableSaveButton()" >Save</button>
+                    <button type="button" class="loginButton btn btn-danger" *ngIf="!productReadonly" (click)="CancelEdit()" >Cancel</button>
+                    <button type="button" class="loginButton btn btn-danger" *ngIf="productReadonly" (click)="deleteProduct()" >Delete</button>
                     
                 </div>
    
