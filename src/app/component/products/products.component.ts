@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
       id: {
         title: 'ID',
         filter: false,
-        editable:false,
+        editable: false,
         addable: false,
       },
       name: {
@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
         filter: false,
         // filterFunction(cell?:any, search?:string): boolean{
         //   return false
-            
+
         // }
       },
     },
@@ -38,26 +38,26 @@ export class ProductsComponent implements OnInit {
       edit: false,
       delete: true,
       custom: [
-      { name: 'viewrecord', title: '<i class="fa fa-eye"></i>'},
-      // { name: 'editrecord', title: '&nbsp;&nbsp;<i class="fa  fa-pencil"></i>' }
-    ],
+        { name: 'viewrecord', title: '<i class="fa fa-eye"></i>' },
+        // { name: 'editrecord', title: '&nbsp;&nbsp;<i class="fa  fa-pencil"></i>' }
+      ],
       position: 'right'
     },
-    add:{
-      addButtonContent:'<i class="fa fa-plus"></i>',
+    add: {
+      addButtonContent: '<i class="fa fa-plus"></i>',
       // createButtonContent: '<i class="fa fa-check"></i>',
       // cancelButtonContent: '<i class="fa fa-ban"></i>',
       // confirmCreate: true
     },
-    delete:{
-      deleteButtonContent:'<i class="fa fa-trash"></i>'
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i>'
     }
     // actions: false,
     // hideSubHeader: true
   }
   source: LocalDataSource;
   showData = false;
-  constructor(private compenentHealperService: ComponentHelperService,private _router: Router) {
+  constructor(private compenentHealperService: ComponentHelperService, private _router: Router) {
     this.source = new LocalDataSource();
   }
 
@@ -65,19 +65,18 @@ export class ProductsComponent implements OnInit {
     this.getProducts()
 
   }
-  
+
   // this.source
-  getProducts(params?:any) {
+  getProducts(params?: any) {
 
 
     this.compenentHealperService.get("/Products/getall", params).subscribe(resp => {
       if (resp.body) {
         this.source.load(resp.body),
-        this.showData = true;
+          this.showData = true;
       }
     }, error => {
-      if(error.error.status = 401){
-
+      if (error.error.status = 401) {
         this.compenentHealperService.errorHandler(error)
       }
 
@@ -85,23 +84,23 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  onCustomAction($event){
+  onCustomAction($event) {
     this._router.navigate([`products/${$event['data']['id']}`]);
     //todo: 
     // make sure only exist id show content nothing else. 
   }
 
-  onSearch(v){
+  onSearch(v) {
     let params = new HttpParams();
-    params = params.set("name",v)
-    this.getProducts(params)  
+    params = params.set("name", v)
+    this.getProducts(params)
   }
 
-  onCreateConfirm($event){
+  onCreateConfirm($event) {
     this._router.navigate([`products/new`]);
   }
 
-  onDelete($event){
+  onDelete($event) {
     Swal.fire({
       title: 'You sure want to delete product with id ' + $event['data'].id + ' ?',
       showDenyButton: true,
@@ -125,14 +124,24 @@ export class ProductsComponent implements OnInit {
 
   }
   deleteProductById(productIdForDeletion) {
-    this.compenentHealperService.delete(`/products/delete/${productIdForDeletion}` ).subscribe(resp=>{
-      if(resp.body){
-        this.compenentHealperService.alert('success',"Product Successfully Deleted","")
+    this.compenentHealperService.delete(`/products/delete/${productIdForDeletion}`).subscribe(resp => {
+      if (resp.body) {
+        Swal.fire({
+          icon: 'success',
+          title: "Product Successfully Deleted",
+          text: "",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          } else if (result.isDismissed) {
+            window.location.reload();
+          }
+        })
       }
-    },error=>{
+    }, error => {
       this.compenentHealperService.errorHandler(error)
     })
-    
+
   }
 
 
